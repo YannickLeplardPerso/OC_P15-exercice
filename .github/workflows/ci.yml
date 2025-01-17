@@ -21,9 +21,21 @@ jobs:
           destination: 'platform=iOS Simulator,name=iPhone 14'
           action: test
           result-bundle-path: 'TestResults/TestResults.xcresult'
-          configuration: Debug
-          xcodebuild-args: CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO
+          build-settings: |
+            CODE_SIGNING_ALLOWED=NO
+            CODE_SIGNING_REQUIRED=NO
+            CODE_SIGN_IDENTITY=""
+            CODE_SIGNING_ALLOWED=NO
+            DEVELOPMENT_TEAM=""
+          allow-provisioning-updates: true
         
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: success() || failure()
+        with:
+          name: TestResults
+          path: TestResults/TestResults.xcresult
+          
       - name: Process Test Results
         uses: kishikawakatsumi/xcresulttool@v1
         with:
