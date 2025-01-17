@@ -13,28 +13,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set Default Keychain
-        run: |
-          security create-keychain -p "" build.keychain
-          security list-keychains -s build.keychain
-          security default-keychain -s build.keychain
-          security unlock-keychain -p "" build.keychain
-          security set-keychain-settings build.keychain
-
       - name: Build and Test
         run: |
-          xcodebuild clean test \
+          xcodebuild test \
             -project EPCollaboratif.xcodeproj \
             -scheme EPCollaboratif \
             -destination 'platform=iOS Simulator,name=iPhone 14' \
-            -resultBundlePath TestResults/TestResults.xcresult \
-            -allowProvisioningUpdates \
-            -derivedDataPath Build/ \
-            DEVELOPMENT_TEAM="" \
-            PROVISIONING_PROFILE="" \
-            CODE_SIGN_STYLE=Automatic \
-            CODE_SIGN_IDENTITY="" \
-            AD_HOC_CODE_SIGNING_ALLOWED=YES
+            -resultBundlePath TestResults/TestResults.xcresult
         
       - name: Upload test results
         uses: actions/upload-artifact@v4
