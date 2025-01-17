@@ -19,7 +19,10 @@ jobs:
             -project EPCollaboratif.xcodeproj \
             -scheme EPCollaboratif \
             -destination 'platform=iOS Simulator,name=iPhone 14' \
-            -resultBundlePath TestResults/TestResults.xcresult
+            -resultBundlePath TestResults/TestResults.xcresult \
+            -allowProvisioningUpdates \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO
         
       - name: Upload test results
         uses: actions/upload-artifact@v4
