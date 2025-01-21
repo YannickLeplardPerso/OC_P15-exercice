@@ -2,7 +2,6 @@ import Combine
 import SwiftUI
 
 class Project: ObservableObject, Equatable {
-    // MARK: - Public Properties
 
     let id: Int
     var name: String
