@@ -28,5 +28,5 @@ jobs:
       - name: Upload test results
         uses: kishikawakatsumi/xcresulttool@v1
         with:
-          path: TestResults.xcresult
+          path: TestResults/TestResults.xcresult
         if: success() || failure()
