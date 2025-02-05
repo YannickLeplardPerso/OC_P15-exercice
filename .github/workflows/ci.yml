@@ -26,8 +26,7 @@ jobs:
           result-bundle-path: 'TestResults/TestResults.xcresult'
         
       - name: Upload test results
-        uses: actions/upload-artifact@v4
-        if: success() || failure()
+        uses: kishikawakatsumi/xcresulttool@v1
         with:
-          name: test-results
-          path: TestResults/TestResults.xcresult
+          path: TestResults.xcresult
+        if: success() || failure()
